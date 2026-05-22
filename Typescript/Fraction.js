@@ -35,40 +35,48 @@ export class Fraction {
     }
     /**
      * 加法
-     * @param {Fraction} other - 另一个分数
+     * @param {Fraction} other - 另一个分数/数字
      * @returns @type {Fraction}
      */
     add(other) {
+        if (typeof other === 'number')
+            other = new Fraction(other, 1);
         const newNumerator = this.numerator * other.denominator + other.numerator * this.denominator;
         const newDenominator = this.denominator * other.denominator;
         return new Fraction(newNumerator, newDenominator);
     }
     /**
      * 减法
-     * @param {Fraction} other - 另一个分数
+     * @param {Fraction} other - 另一个分数/数字
      * @returns @type {Fraction}
      */
     sub(other) {
+        if (typeof other === 'number')
+            other = new Fraction(other, 1);
         const newNumerator = this.numerator * other.denominator - other.numerator * this.denominator;
         const newDenominator = this.denominator * other.denominator;
         return new Fraction(newNumerator, newDenominator);
     }
     /**
      * 乘法
-     * @param {Fraction} other - 另一个分数
+     * @param {Fraction} other - 另一个分数/数字
      * @returns @type {Fraction}
      */
     div(other) {
+        if (typeof other === 'number')
+            other = new Fraction(other, 1);
         const newNumerator = this.numerator * other.denominator;
         const newDenominator = this.denominator * other.numerator;
         return new Fraction(newNumerator, newDenominator);
     }
     /**
      * 除法
-     * @param {Fraction} other - 另一个分数
+     * @param {Fraction} other - 另一个分数/数字
      * @returns @type {Fraction}
      */
     mul(other) {
+        if (typeof other === 'number')
+            other = new Fraction(other, 1);
         const newNumerator = this.numerator * other.numerator;
         const newDenominator = this.denominator * other.denominator;
         return new Fraction(newNumerator, newDenominator);
@@ -94,6 +102,18 @@ export class Fraction {
         }
         return new Fraction(Math.floor(this.toNumber() ** (1 / root) * 10000), 10000);
     }
+    /**
+     * 求余
+     * @param other - 另一个分数/数字
+     * @returns @type {Fraction}
+     */
+    mod(other) {
+        if (typeof other === 'number')
+            other = new Fraction(other, 1);
+        const newNumerator = (this.numerator * other.denominator) % (other.numerator * this.denominator);
+        const newDenominator = this.denominator * other.denominator;
+        return new Fraction(newNumerator, newDenominator);
+    }
     toNumber() {
         return this.numerator / this.denominator;
     }
@@ -101,7 +121,7 @@ export class Fraction {
         return `${this.numerator}/${this.denominator}`;
     }
 }
-// console.log(new Fraction(1, 2).add(new Fraction(1, 3)).toString()) // "5/6"
+// console.log(new Fraction(1, 2).add(3).toString()) // "5/6"
 // console.log(new Fraction(1, 2).sub(new Fraction(1, 3)).toString()) // "1/6"
 // console.log(new Fraction(1, 2).mul(new Fraction(1, 3)).toString()) // "1/6"
 // console.log(new Fraction(1, 2).div(new Fraction(1, 3)).toString()) // "3/2"
