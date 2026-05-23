@@ -1,0 +1,19 @@
+{
+    "scripts": {
+        "build": "tsc",
+        "prepublishOnly": "npm run build"
+    },
+    "description": "一个简单的分数类库，支持加减乘除、幂运算和开方运算。\nA simple fraction library that supports addition, subtraction, multiplication, division, exponentiation and root extraction.",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "name": "fraction-tool",
+    "version": "1.0.0",
+    "files": [
+        "dist",
+        "LICENSE",
+        "README.md"
+    ],
+    "dependencies": {
+        "fraction-tool": "^1.0.0"
+    }
+}

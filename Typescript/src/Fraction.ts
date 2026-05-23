@@ -4,6 +4,10 @@
 export class Fraction
 {
     /**
+     * 根的精度，默认为10000，即小数点后4位
+     */
+    static root_precision = 10000
+    /**
      * @param numerator 分子
      * @param denominator 分母
      * @param isReduce 是否约分，默认为true
@@ -99,7 +103,7 @@ export class Fraction
      * @returns @type {Fraction}
      */
 
-    square(exponent:number): Fraction
+    pow(exponent:number): Fraction
     {
         if(exponent%1 !== 0)
             throw new Error("Exponent must be an integer.")
@@ -117,7 +121,7 @@ export class Fraction
         {
             throw new Error("Exponent must be an integer.")
         }
-        return new Fraction(Math.floor(this.toNumber()**(1/root)*10000),10000)
+        return new Fraction(Math.floor(this.toNumber()**(1/root)*Fraction.root_precision),Fraction.root_precision)
     }
 
     /**
@@ -144,10 +148,3 @@ export class Fraction
         return `${this.numerator}/${this.denominator}`
     }
 }
-
-// console.log(new Fraction(1, 2).add(3).toString()) // "5/6"
-// console.log(new Fraction(1, 2).sub(new Fraction(1, 3)).toString()) // "1/6"
-// console.log(new Fraction(1, 2).mul(new Fraction(1, 3)).toString()) // "1/6"
-// console.log(new Fraction(1, 2).div(new Fraction(1, 3)).toString()) // "3/2"
-// console.log(new Fraction(1, 2).square(2).toString()) // "1/4"
-// console.log(new Fraction(2,1).root(2).toString()) // "1/2"

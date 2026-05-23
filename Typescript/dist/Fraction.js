@@ -1,9 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Fraction = void 0;
 /**
  * 分数系统
  */
-export class Fraction {
-    numerator;
-    denominator;
+class Fraction {
     /**
      * @param numerator 分子
      * @param denominator 分母
@@ -86,7 +87,7 @@ export class Fraction {
      * @param {number} exponent - 指数
      * @returns @type {Fraction}
      */
-    square(exponent) {
+    pow(exponent) {
         if (exponent % 1 !== 0)
             throw new Error("Exponent must be an integer.");
         return new Fraction(this.numerator ** exponent, this.denominator ** exponent);
@@ -100,7 +101,7 @@ export class Fraction {
         if (root % 1 !== 0) {
             throw new Error("Exponent must be an integer.");
         }
-        return new Fraction(Math.floor(this.toNumber() ** (1 / root) * 10000), 10000);
+        return new Fraction(Math.floor(this.toNumber() ** (1 / root) * Fraction.root_precision), Fraction.root_precision);
     }
     /**
      * 求余
@@ -121,9 +122,8 @@ export class Fraction {
         return `${this.numerator}/${this.denominator}`;
     }
 }
-// console.log(new Fraction(1, 2).add(3).toString()) // "5/6"
-// console.log(new Fraction(1, 2).sub(new Fraction(1, 3)).toString()) // "1/6"
-// console.log(new Fraction(1, 2).mul(new Fraction(1, 3)).toString()) // "1/6"
-// console.log(new Fraction(1, 2).div(new Fraction(1, 3)).toString()) // "3/2"
-// console.log(new Fraction(1, 2).square(2).toString()) // "1/4"
-// console.log(new Fraction(2,1).root(2).toString()) // "1/2"
+exports.Fraction = Fraction;
+/**
+ * 根的精度，默认为10000，即小数点后4位
+ */
+Fraction.root_precision = 10000;
