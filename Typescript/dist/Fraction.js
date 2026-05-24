@@ -13,7 +13,7 @@ class Fraction {
     constructor(numerator, denominator, isReduce = true) {
         this.numerator = numerator;
         this.denominator = denominator;
-        if (denominator == 0)
+        if (denominator == 0 || numerator % 1 !== 0 || denominator % 1 !== 0)
             throw new Error('Denominator cannot be zero');
         if (isReduce)
             this.reduce();
@@ -25,6 +25,15 @@ class Fraction {
         }
         else
             return this.gcd(b, a % b);
+    }
+    /**
+     * 数字转分数
+     * @param num - 数字
+     * @param precision - 转换精度，默认为Fraction.fromNumber_precision
+     * @returns @type {Fraction}
+     */
+    static fromNumber(num, precision = Fraction.fromNumber_precision) {
+        return new Fraction(Math.floor(num * precision), precision);
     }
     /**
      * 约分
@@ -41,7 +50,7 @@ class Fraction {
      */
     add(other) {
         if (typeof other === 'number')
-            other = new Fraction(other, 1);
+            other = Fraction.fromNumber(other);
         const newNumerator = this.numerator * other.denominator + other.numerator * this.denominator;
         const newDenominator = this.denominator * other.denominator;
         return new Fraction(newNumerator, newDenominator);
@@ -53,7 +62,7 @@ class Fraction {
      */
     sub(other) {
         if (typeof other === 'number')
-            other = new Fraction(other, 1);
+            other = Fraction.fromNumber(other);
         const newNumerator = this.numerator * other.denominator - other.numerator * this.denominator;
         const newDenominator = this.denominator * other.denominator;
         return new Fraction(newNumerator, newDenominator);
@@ -65,7 +74,7 @@ class Fraction {
      */
     div(other) {
         if (typeof other === 'number')
-            other = new Fraction(other, 1);
+            other = Fraction.fromNumber(other);
         const newNumerator = this.numerator * other.denominator;
         const newDenominator = this.denominator * other.numerator;
         return new Fraction(newNumerator, newDenominator);
@@ -77,7 +86,7 @@ class Fraction {
      */
     mul(other) {
         if (typeof other === 'number')
-            other = new Fraction(other, 1);
+            other = Fraction.fromNumber(other);
         const newNumerator = this.numerator * other.numerator;
         const newDenominator = this.denominator * other.denominator;
         return new Fraction(newNumerator, newDenominator);
@@ -95,13 +104,14 @@ class Fraction {
     /**
      * 求根
      * @param {number} root - 根的次数
+     * @param {number} precision - 计算精度，默认为Fraction.root_precision
      * @returns @type {Fraction}
      */
-    root(root) {
+    root(root, precision = Fraction.root_precision) {
         if (root % 1 !== 0) {
             throw new Error("Exponent must be an integer.");
         }
-        return new Fraction(Math.floor(this.toNumber() ** (1 / root) * Fraction.root_precision), Fraction.root_precision);
+        return new Fraction(Math.floor(this.toNumber() ** (1 / root) * precision), precision);
     }
     /**
      * 求余
@@ -110,7 +120,7 @@ class Fraction {
      */
     mod(other) {
         if (typeof other === 'number')
-            other = new Fraction(other, 1);
+            other = Fraction.fromNumber(other);
         const newNumerator = (this.numerator * other.denominator) % (other.numerator * this.denominator);
         const newDenominator = this.denominator * other.denominator;
         return new Fraction(newNumerator, newDenominator);
@@ -127,3 +137,7 @@ exports.Fraction = Fraction;
  * 根的精度，默认为10000，即小数点后4位
  */
 Fraction.root_precision = 10000;
+/**
+ * 数字转分数的精度
+ */
+Fraction.fromNumber_precision = 10000;

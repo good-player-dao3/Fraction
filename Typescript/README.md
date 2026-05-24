@@ -1,10 +1,8 @@
-(English below)
+# Fraction Tool 分数工具库
 
-# 分数工具库 Fraction Tool
+一个支持多种分数运算的 TypeScript/JavaScript 工具库，支持加、减、乘、除、幂、开方、取余等操作，自动约分，支持与整数混合运算，适合数学、教育等场景。
 
-一个简单的 TypeScript 分数类库，支持加、减、乘、除、幂、开方、取余等操作。
-
-A simple TypeScript fraction library supporting addition, subtraction, multiplication, division, exponentiation, root extraction, and modulo operations.
+A simple TypeScript/JavaScript library for fraction operations: addition, subtraction, multiplication, division, exponentiation, root extraction, modulo, auto reduction, and mixed operations with integers.
 
 ---
 
@@ -12,7 +10,7 @@ A simple TypeScript fraction library supporting addition, subtraction, multiplic
 
 - 支持分数的加、减、乘、除、幂、开方、取余
 - 自动约分
-- 支持与整数混合运算
+- 支持与数字混合运算
 - TypeScript 类型声明
 
 ---
@@ -49,14 +47,23 @@ console.log(sum.toNumber()); // 0.8333...
 
 ## API 说明 API Reference
 
-### 构造函数 Constructor
+
+### 构造函数 Constructor  <span id="sym:fromNumber">#sym:fromNumber</span>
 
 ```typescript
-new Fraction(numerator: number, denominator: number, isReduce: boolean = true)
+new Fraction(numerator: number, denominator: number, isReduce: boolean = true) // #sym:fromNumber
 ```
 - `numerator`：分子 Numerator
 - `denominator`：分母 Denominator（不能为0, cannot be zero）
 - `isReduce`：是否自动约分 Whether to reduce automatically (default: true)
+
+### 静态方法 Static Method <span id="sym:fromNumber">#sym:fromNumber</span>
+
+```typescript
+Fraction.fromNumber(num: number, precision?: number): Fraction // #sym:fromNumber
+```
+- `num`：要转换的数字 The number to convert
+- `precision`：转换精度（可选，默认10000）Precision (optional, default 10000)
 
 ### 方法 Methods
 
@@ -85,44 +92,10 @@ npm run test
 
 ---
 
+## github
+
+[To Github](https://github.com/good-player-dao3/Fraction)
+
 ## 许可证 License
 
-MIT
-
----
-
-# Fraction Tool
-
-A simple TypeScript library for fraction operations: addition, subtraction, multiplication, division, exponentiation, root extraction, and modulo.
-
-## Features
-- Fraction arithmetic: add, subtract, multiply, divide, power, root, modulo
-- Auto reduction
-- Mixed operations with integers
-- TypeScript type definitions
-
-## Installation
-```bash
-npm install fraction-tool
-```
-
-## Quick Start
-```typescript
-import { Fraction } from 'fraction-tool';
-const a = new Fraction(1, 2);
-const b = new Fraction(1, 3);
-const sum = a.add(b);
-console.log(sum.toString()); // "5/6"
-```
-
-## API Reference
-See above for details.
-
-## Build & Test
-```bash
-npm run build
-npm run test
-```
-
-## License
 MIT

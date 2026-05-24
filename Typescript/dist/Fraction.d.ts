@@ -9,12 +9,23 @@ export declare class Fraction {
      */
     static root_precision: number;
     /**
+     * 数字转分数的精度
+     */
+    static fromNumber_precision: number;
+    /**
      * @param numerator 分子
      * @param denominator 分母
      * @param isReduce 是否约分，默认为true
      */
     constructor(numerator: number, denominator: number, isReduce?: boolean);
     private gcd;
+    /**
+     * 数字转分数
+     * @param num - 数字
+     * @param precision - 转换精度，默认为Fraction.fromNumber_precision
+     * @returns @type {Fraction}
+     */
+    static fromNumber(num: number, precision?: number): Fraction;
     /**
      * 约分
      */
@@ -52,9 +63,10 @@ export declare class Fraction {
     /**
      * 求根
      * @param {number} root - 根的次数
+     * @param {number} precision - 计算精度，默认为Fraction.root_precision
      * @returns @type {Fraction}
      */
-    root(root: number): Fraction;
+    root(root: number, precision?: number): Fraction;
     /**
      * 求余
      * @param other - 另一个分数/数字

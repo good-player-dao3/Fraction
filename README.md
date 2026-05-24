@@ -8,12 +8,17 @@ A simple fraction library supporting addition, subtraction, multiplication, divi
 ## 特性 Features
 - 支持分数的加、减、乘、除、幂、开方、取余
 - 自动约分
-- 支持与整数混合运算
+- 支持与数字混合运算
 
 ## Features
 - Fraction arithmetic: add, subtract, multiply, divide, power, root, modulo
 - Auto reduction
-- Mixed operations with integers
+- Mixed operations with numbers
+
+---
+
+## 下载 Install
+- Typescript/Javascript ->  ```npm install fraction-tool ```
 
 ---
 
